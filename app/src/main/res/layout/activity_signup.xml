@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@drawable/bg"
+    tools:context=".SignupActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/font123"
+        android:text="Sign up to your Account"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:foregroundGravity="center_horizontal"
+        android:src="@drawable/leftarrow"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toStartOf="@+id/title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title" />
+
+
+    <TextView
+        android:id="@+id/bnametv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/semibold"
+        android:text="Bussiness Name"
+        android:textColor="@color/black1"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="@+id/bnameed"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/bnameed"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/blackline3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/black2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bnametv"
+        app:layout_constraintTop_toBottomOf="@+id/bnametv">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/bownernametv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semibold"
+        android:text="Bussiness Owner Name"
+        android:textColor="@color/black1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/bnameed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bnameed"
+        app:layout_constraintTop_toBottomOf="@+id/bnameed" />
+
+    <EditText
+        android:id="@+id/bownernameed"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/blackline3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/black2"
+        app:layout_constraintEnd_toEndOf="@+id/bnameed"
+        app:layout_constraintStart_toStartOf="@+id/bownernametv"
+        app:layout_constraintTop_toBottomOf="@+id/bownernametv">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/phonenotv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semibold"
+        android:text="Phone Number"
+        android:textColor="@color/black1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/bownernameed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bownernameed"
+        app:layout_constraintTop_toBottomOf="@+id/bownernameed" />
+
+    <EditText
+        android:id="@+id/phoneed"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/blackline3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/black2"
+        app:layout_constraintEnd_toEndOf="@+id/phonenotv"
+        app:layout_constraintStart_toStartOf="@+id/phonenotv"
+        app:layout_constraintTop_toBottomOf="@+id/phonenotv">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/emailtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semibold"
+        android:text="Email Address"
+        android:textColor="@color/black1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/phoneed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/phoneed"
+        app:layout_constraintTop_toBottomOf="@+id/phoneed" />
+
+    <EditText
+        android:id="@+id/emailed"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/blackline3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/black2"
+        app:layout_constraintEnd_toEndOf="@+id/phoneed"
+        app:layout_constraintStart_toStartOf="@+id/phoneed"
+        app:layout_constraintTop_toBottomOf="@+id/emailtv">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/BAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/font123"
+        android:text="Business Address"
+        android:textColor="@color/red1"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/emailed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/emailed"
+        app:layout_constraintTop_toBottomOf="@+id/emailed" />
+
+    <TextView
+        android:id="@+id/Doornotv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semibold"
+        android:text="Door No"
+        android:textColor="@color/black1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/emailed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/emailed"
+        app:layout_constraintTop_toBottomOf="@+id/BAddress" />
+
+    <EditText
+        android:id="@+id/doornoed"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/blackline3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/black2"
+        app:layout_constraintEnd_toEndOf="@+id/emailed"
+        app:layout_constraintStart_toStartOf="@+id/Doornotv"
+        app:layout_constraintTop_toBottomOf="@+id/Doornotv">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/StreetNametv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semibold"
+        android:text="Street Name"
+        android:textColor="@color/black1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/doornoed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/doornoed"
+        app:layout_constraintTop_toBottomOf="@+id/doornoed" />
+
+    <EditText
+        android:id="@+id/StreetNameed"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/blackline3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/black2"
+        app:layout_constraintEnd_toEndOf="@+id/doornoed"
+        app:layout_constraintStart_toStartOf="@+id/doornoed"
+        app:layout_constraintTop_toBottomOf="@+id/StreetNametv">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/citynametv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semibold"
+        android:text="City Name"
+        android:textColor="@color/black1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/StreetNameed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/StreetNameed"
+        app:layout_constraintTop_toBottomOf="@+id/StreetNameed" />
+
+    <EditText
+        android:id="@+id/citynameed"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/blackline3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/black2"
+        app:layout_constraintEnd_toEndOf="@+id/StreetNameed"
+        app:layout_constraintStart_toStartOf="@+id/citynametv"
+        app:layout_constraintTop_toBottomOf="@+id/citynametv">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/pincodetv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/semibold"
+        android:text="Postcode"
+        android:textColor="@color/black1"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/citynameed"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/citynameed"
+        app:layout_constraintTop_toBottomOf="@+id/citynameed" />
+
+    <EditText
+        android:id="@+id/pincodeed"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/blackline3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/black2"
+        app:layout_constraintEnd_toEndOf="@+id/citynameed"
+        app:layout_constraintStart_toStartOf="@+id/citynameed"
+        app:layout_constraintTop_toBottomOf="@+id/pincodetv"></EditText>
+
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_bg"
+        android:drawableStart="@drawable/baseline_login_24"
+        android:fontFamily="@font/font123"
+        android:onClick="gotodialog"
+        android:paddingLeft="135dp"
+        android:paddingRight="135dp"
+        android:text="\tSign up"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pincodeed" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

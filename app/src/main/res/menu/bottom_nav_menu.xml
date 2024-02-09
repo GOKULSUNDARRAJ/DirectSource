@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_hohomee"
+        android:icon="@drawable/menu_home"
+        android:fontFamily="@font/semibold"
+        android:title="Home" />
+    <item
+        android:id="@+id/deals"
+        android:icon="@drawable/menu_deals"
+        android:fontFamily="@font/semibold"
+        android:title="Deals" />
+    <item
+        android:id="@+id/loyal"
+        android:icon="@drawable/menu_star"
+        android:fontFamily="@font/semibold"
+        android:title="Loyal Account" />
+    <item
+        android:id="@+id/browse"
+        android:icon="@drawable/menu_browse"
+        android:fontFamily="@font/semibold"
+        android:title="Browse" />
+    <item
+        android:id="@+id/fav"
+        android:icon="@drawable/menu_heart"
+        android:fontFamily="@font/semibold"
+        android:title="Favorite" />
+
+</menu>

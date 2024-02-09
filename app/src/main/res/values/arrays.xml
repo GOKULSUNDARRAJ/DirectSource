@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="slot_times_array">
+        <item>09:00 am</item>
+        <item>10:00 am</item>
+        <item>11:00 am</item>
+
+    </string-array>
+</resources>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ResetPassActivity">
+
+    <ImageView
+        android:id="@+id/logo12"
+        android:layout_width="654dp"
+        android:layout_height="234dp"
+        android:src="@drawable/loginbg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="250dp"
+        android:fontFamily="@font/font123"
+        android:text="Verification"
+        android:textColor="@color/red1"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logo123"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/email_lock"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/emai4ltv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/font123"
+        android:text="Enter 4 digit code"
+        android:textColor="@color/black1"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo123" />
+
+    <TextView
+        android:id="@+id/emailtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/semibold"
+        android:text="Enter the 4 digit code that you received \non your email address or mobile number"
+        android:textColor="@color/black1"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/emai4ltv"
+        app:layout_constraintStart_toStartOf="@+id/emai4ltv"
+        app:layout_constraintTop_toBottomOf="@+id/emai4ltv" />
+
+    <EditText
+        android:id="@+id/pin1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/pin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailtv" />
+
+
+    <EditText
+        android:id="@+id/pin2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/pin"
+        app:layout_constraintBottom_toBottomOf="@+id/pin1"
+        app:layout_constraintStart_toEndOf="@+id/pin1"
+        app:layout_constraintTop_toTopOf="@+id/pin1" />
+
+
+    <EditText
+        android:id="@+id/pin3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/pin"
+        app:layout_constraintBottom_toBottomOf="@+id/pin2"
+        app:layout_constraintStart_toEndOf="@+id/pin2"
+        app:layout_constraintTop_toTopOf="@+id/pin2" />
+
+    <EditText
+        android:id="@+id/pin4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/pin"
+        app:layout_constraintBottom_toBottomOf="@+id/pin3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/pin3"
+        app:layout_constraintTop_toTopOf="@+id/pin3" />
+
+    <TextView
+        android:id="@+id/ema6iltv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/semibold"
+        android:text="If you didn't receive a code !"
+        android:textColor="@color/black1"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/pin1"
+        app:layout_constraintTop_toBottomOf="@+id/pin2" />
+
+    <TextView
+        android:id="@+id/ema6iltv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/semibold"
+        android:text="Resend"
+        android:textSize="18dp"
+        android:textColor="@color/blue1"
+        app:layout_constraintBottom_toBottomOf="@+id/ema6iltv"
+        app:layout_constraintStart_toEndOf="@+id/ema6iltv"
+        app:layout_constraintTop_toTopOf="@+id/ema6iltv" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button_bg"
+        android:fontFamily="@font/semibold"
+        android:text="Verify"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ema6iltv" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

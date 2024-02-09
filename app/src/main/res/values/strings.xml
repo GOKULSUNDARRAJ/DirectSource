@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MileStoneUi</string>
+    <string name="success">The submitted credentials are being reviewed at our end Our team will be reaching out to you in 5 to 7 working days</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
