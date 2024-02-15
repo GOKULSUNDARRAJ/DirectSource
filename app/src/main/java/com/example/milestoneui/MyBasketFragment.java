@@ -1,6 +1,9 @@
 package com.example.milestoneui;
 
-import android.annotation.SuppressLint;
+import static android.app.appsearch.AppSearchResult.RESULT_OK;
+
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -9,23 +12,29 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyBasketActivity extends AppCompatActivity {
+public class MyBasketFragment extends Fragment {
 
     private static final String TAG = "MyBasketActivity";
 
@@ -34,33 +43,40 @@ public class MyBasketActivity extends AppCompatActivity {
     LinearLayout checkout;
 
     LinearLayout continuetoShoping;
-
-    @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_basket);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.activity_my_basket, container, false);
 
-        continuetoShoping=findViewById(R.id.lin4);
+
+
+
+        continuetoShoping=view.findViewById(R.id.lin4);
         continuetoShoping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+// Create a new instance of the BrowseFragment
+                BrowseFragment browseFragment = new BrowseFragment();
 
-                MyDealsFragment newFragment = new MyDealsFragment();
-                Bundle args = new Bundle();
-                args.putBoolean("fromProfileActivity", true); // Passing the flag
-                newFragment.setArguments(args);
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(android.R.id.content, newFragment);
+                // Get the FragmentManager and start a transaction
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
+                // Replace the current fragment in the fragment_container with the BrowseFragment
+                // Add this transaction to the back stack so the user can navigate back
+                transaction.replace(R.id.fragment_container, browseFragment);
                 transaction.addToBackStack(null);
+
+                // Commit the transaction
                 transaction.commit();
 
+                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+                bottomNavigationView.setSelectedItemId(R.id.browse); // Set the item id of the BrowseFragment
             }
         });
 
 
 
-        checkoutnowt = findViewById(R.id.checkoutnowt);
+        checkoutnowt =view.findViewById(R.id.checkoutnowt);
         checkoutnowt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +85,7 @@ public class MyBasketActivity extends AppCompatActivity {
             }
         });
 
-        btn = findViewById(R.id.btn);
+        btn = view.findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +93,7 @@ public class MyBasketActivity extends AppCompatActivity {
             }
         });
 
-        checkout = findViewById(R.id.checkoutnow);
+        checkout = view.findViewById(R.id.checkoutnow);
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,11 +103,18 @@ public class MyBasketActivity extends AppCompatActivity {
         });
 
         ImageView goToHomeButton;
-        goToHomeButton = findViewById(R.id.back);
+        goToHomeButton = view.findViewById(R.id.back);
         goToHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigateToHome();
+
+                HomeFragment fragmentB = new HomeFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragmentB);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+                bottomNavigationView.setSelectedItemId(R.id.navigation_hohomee);
             }
         });
 
@@ -127,28 +150,28 @@ public class MyBasketActivity extends AppCompatActivity {
         myBasketItems.add(new MyBasketItem("Cucumbers", "BAK403", "(Class L)-1x(14-16)", R.drawable.checken));
         myBasketItems.add(new MyBasketItem("Cucumbers", "BAK403", "(Class L)-1x(14-16)", R.drawable.sause));
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView =view.findViewById(R.id.recyclerView);
 
         if (recyclerView == null) {
             Log.e(TAG, "RecyclerView is null");
-            return;
+            return view;
         }
 
-        TextView title23TextView = findViewById(R.id.title23);
+        TextView title23TextView = view.findViewById(R.id.title23);
         if (title23TextView != null) {
             title23TextView.setText("Total items (" + myBasketItems.size() + ")");
         } else {
             Log.e(TAG, "title23 TextView is null");
         }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        lin1 = findViewById(R.id.lin1);
-        lin2 = findViewById(R.id.lin2);
-        lin3 = findViewById(R.id.lin6);
-        lin4 = findViewById(R.id.lin4);
-        lin5 = findViewById(R.id.checkoutnow);
+        lin1 = view.findViewById(R.id.lin1);
+        lin2 = view.findViewById(R.id.lin2);
+        lin3 = view.findViewById(R.id.lin6);
+        lin4 = view.findViewById(R.id.lin4);
+        lin5 = view.findViewById(R.id.checkoutnow);
 
         if (myBasketItems.isEmpty()) {
             lin3.setVisibility(View.VISIBLE);
@@ -165,7 +188,7 @@ public class MyBasketActivity extends AppCompatActivity {
             lin5.setVisibility(View.VISIBLE);
         }
 
-        MyBasketItemsAdapter adapter = new MyBasketItemsAdapter(this, myBasketItems);
+        MyBasketItemsAdapter adapter = new MyBasketItemsAdapter(getContext(), myBasketItems);
         recyclerView.setAdapter(adapter);
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -198,7 +221,7 @@ public class MyBasketActivity extends AppCompatActivity {
                     lin5.setVisibility(View.VISIBLE);
                 }
 
-                TextView title23TextView = findViewById(R.id.title23);
+                TextView title23TextView = view.findViewById(R.id.title23);
                 if (title23TextView != null) {
                     title23TextView.setText("Total items (" + (adapter.getItemCount() - 1) + ")");
                 } else {
@@ -247,16 +270,20 @@ public class MyBasketActivity extends AppCompatActivity {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        return view;
     }
 
+
+
     private void showCustomDialog() {
-        CustomDialogClassbookyourslot cdd = new CustomDialogClassbookyourslot(this);
+        CustomDialogClassbookyourslot cdd = new CustomDialogClassbookyourslot(getContext());
         cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         cdd.show();
     }
     private void showCustomDialogSwap() {
         List<SwapItem> swapItemList = new ArrayList<>();
-        swapdialog cdd = new swapdialog(MyBasketActivity.this, swapItemList);
+        swapdialog cdd = new swapdialog(getContext(), swapItemList);
         cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         cdd.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -270,11 +297,4 @@ public class MyBasketActivity extends AppCompatActivity {
     }
 
 
-    private void navigateToHome() {
-
-        Intent intent = new Intent();
-        intent.putExtra("navigate_to_home", true);
-        setResult(RESULT_OK, intent);
-        finish();
-    }
 }

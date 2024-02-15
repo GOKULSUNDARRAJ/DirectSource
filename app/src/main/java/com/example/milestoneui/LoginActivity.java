@@ -1,121 +1,109 @@
 package com.example.milestoneui;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText Emailedt;
-    EditText PassEdt;
-    Button LoginBtn;
 
-    @SuppressLint("MissingInflatedId")
+    EditText emailEditText;
+    EditText passwordEditText;
+    Button loginButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_login);
 
-        Emailedt=findViewById(R.id.emailedt);
-        PassEdt=findViewById(R.id.passdt);
-        LoginBtn=findViewById(R.id.login);
+        emailEditText = findViewById(R.id.emailedt);
+        passwordEditText = findViewById(R.id.passdt);
+        loginButton = findViewById(R.id.login);
 
 
 
-
-
-        LoginBtn.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
 
-                String email = Emailedt.getText().toString();
-                String password = PassEdt.getText().toString();
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://staging-ddpoints.mydd.app/ds_customer/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
 
-                if (email.isEmpty()) {
-                    Emailedt.setError("Email is Required");
+                ApiService apiService = retrofit.create(ApiService.class);
 
-                }else if (password.isEmpty()){
-                    PassEdt.setError("Password is Required");
-                }else {
+                LoginRequest loginRequest = new LoginRequest("DS_APP", email, password, "DBB8582E-E4F6-4BB7-8FE4-809FD1FB4900", "", "A", "");
 
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                }
+                Call<LoginResponse> call = apiService.login(loginRequest);
+                call.enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            LoginResponse loginResponse = response.body();
+                            boolean status = loginResponse.isStatus();
+                            String message = loginResponse.getMessage();
+
+                            if (status) {
+
+                                String userEmail = emailEditText.getText().toString().trim();
+
+                                String registeredEmail = loginResponse.getResponse().getEmail();
+
+                                if (userEmail.equals(registeredEmail)) {
+
+                                    String customerId = String.valueOf(loginResponse.getResponse().getCustomerId());
+                                    String companyName = loginResponse.getResponse().getCompanyName();
+                                    String accessToken = loginResponse.getResponse().getAccessToken();
+
+                                    Toast.makeText(LoginActivity.this, "You are successfully registered: " + customerId, Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(v.getContext(),MainActivity.class));
+
+                                } else {
+
+                                    Toast.makeText(LoginActivity.this, "Invalid email", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+
+                                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+
+                            Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
 
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                        Toast.makeText(LoginActivity.this, "Login failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
-
-
 
     }
 
     public void gotocreateActivity(View view) {
-        startActivity(new Intent(LoginActivity.this,SignupActivity.class));
+        startActivity(new Intent(view.getContext(),SignupActivity.class));
     }
-
-    public void showBottomSheet(View view) {
-        showDialog();
-    }
-
-
-    public void gotoMain(View view) {
-        startActivity(new Intent(view.getContext(),MainActivity.class));
-    }
-
-    private void showDialog() {
-
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.bottom_sheet_layout);
-
-
-        Button conbtn=dialog.findViewById(R.id.conbtn);
-        conbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog2();
-            }
-        });
-
-        dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-
-    }
-
-    private void showDialog2() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.fragment_forget_link_bottom_sheet);
-        Button login=dialog.findViewById(R.id.login);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-
-    }
-
 
 
 

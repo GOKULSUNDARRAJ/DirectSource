@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,6 +47,7 @@ public class MyDealsFragment extends Fragment {
     boolean isListView = false;
 
     ImageView Image;
+    TextView searchEditText;
 
 
 
@@ -77,6 +80,15 @@ public class MyDealsFragment extends Fragment {
             }
         });
 
+
+
+        searchEditText = view.findViewById(R.id.productsearch);
+        searchEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(),SearchActivity.class));
+            }
+        });
 
 
         ImageView back1=view.findViewById(R.id.back1);
@@ -113,7 +125,11 @@ public class MyDealsFragment extends Fragment {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), MyBasketActivity.class));
+                MyBasketFragment fragmentB = new MyBasketFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragmentB);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
 
         });
@@ -155,8 +171,8 @@ public class MyDealsFragment extends Fragment {
         populateDummyData();
 
 
-        gridProductAdapter = new ProductAdapter(productList);
-        listProductAdapter = new ProductListAdapter(productList);
+        gridProductAdapter = new ProductAdapter(productList,getParentFragmentManager());
+        listProductAdapter = new ProductListAdapter(productList,getParentFragmentManager());
 
 
         recyclerView.setAdapter(gridProductAdapter);

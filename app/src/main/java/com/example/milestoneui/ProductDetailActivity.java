@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -49,11 +50,35 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     ImageView back;
 
+    androidx.constraintlayout.widget.ConstraintLayout Cart;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+
+        Cart =findViewById(R.id.cart123);
+        Cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new instance of your fragment
+                MyBasketFragment myBasketFragment = new MyBasketFragment();
+
+                // Begin a fragment transaction
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                // Replace the fragment_container with the new fragment
+                transaction.replace(R.id.fragment_container, myBasketFragment);
+
+                // Add the transaction to the back stack
+                transaction.addToBackStack(null);
+
+                // Commit the transaction
+                transaction.commit();
+            }
+        });
+
 
         add = findViewById(R.id.add);
         minus = findViewById(R.id.add1);

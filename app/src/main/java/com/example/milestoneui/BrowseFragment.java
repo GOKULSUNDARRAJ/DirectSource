@@ -16,16 +16,20 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -44,6 +48,8 @@ public class BrowseFragment extends Fragment {
     private Button filter, sortbtn;
     TextView textView;
 
+    private AppBarLayout appBarLayout;
+    private Toolbar toolbar;
 
     List<Item> itemList;
     androidx.constraintlayout.widget.ConstraintLayout cart;
@@ -56,6 +62,7 @@ public class BrowseFragment extends Fragment {
     boolean isListView = false;
 
 
+    TextView searchEditText;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -63,6 +70,27 @@ public class BrowseFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_browse, container, false);
+
+
+
+
+        ImageView back1=view.findViewById(R.id.back1);
+        back1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProfileFragment fragmentB = new ProfileFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragmentB);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+
+
+
+
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
        ImageView  Image=view.findViewById(R.id.Image);
 
@@ -77,6 +105,7 @@ public class BrowseFragment extends Fragment {
                 transaction.commit();
             }
         });
+
 
 
 
@@ -136,6 +165,7 @@ public class BrowseFragment extends Fragment {
             }
         });
 
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             String selectedItems = bundle.getString("selectedItems", "");
@@ -153,9 +183,16 @@ public class BrowseFragment extends Fragment {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), MyBasketActivity.class));
+                MyBasketFragment fragmentB = new MyBasketFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragmentB);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
+
+
+
 
 
         sortbtn.setOnClickListener(new View.OnClickListener() {
@@ -189,9 +226,9 @@ public class BrowseFragment extends Fragment {
         populateDummyData();
 
 
-        gridProductAdapter = new BrowseAdapter2(getContext(), itemList2);
+        gridProductAdapter = new BrowseAdapter2(getContext(), itemList2,getParentFragmentManager());
 
-        listProductAdapter = new BrowseAdapter(getContext(),itemList2);
+        listProductAdapter = new BrowseAdapter(getContext(),itemList2,getParentFragmentManager());
 
         recyclerView2.setAdapter(gridProductAdapter);
         recyclerView2.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -202,6 +239,17 @@ public class BrowseFragment extends Fragment {
 
         }
 
+
+
+
+
+        searchEditText = view.findViewById(R.id.productsearch);
+        searchEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(),SearchActivity.class));
+            }
+        });
         return view;
     }
 
@@ -259,7 +307,7 @@ public class BrowseFragment extends Fragment {
 
 
     private void populateDummyData() {
-        itemList2.add(new BrowseItem(R.drawable.checken, "Poultry"));
+        itemList2.add(new BrowseItem(R.drawable.checken, "poultry"));
         itemList2.add(new BrowseItem(R.drawable.oil, "Oils Fats"));
         itemList2.add(new BrowseItem(R.drawable.carrybags, "Bag"));
         itemList2.add(new BrowseItem(R.drawable.co2, "Drinks"));
@@ -293,6 +341,21 @@ public class BrowseFragment extends Fragment {
 
     }
 
+
+
+    private void filter(String searchText) {
+        List<BrowseItem> filteredItemList = new ArrayList<>();
+        for (BrowseItem item : itemList2) {
+            if (item.getTitle().toLowerCase().contains(searchText.toLowerCase())) {
+                filteredItemList.add(item);
+            }
+        }
+
+        listProductAdapter.setItems(filteredItemList);
+        listProductAdapter.notifyDataSetChanged();
+        gridProductAdapter.setItems(filteredItemList);
+        gridProductAdapter.notifyDataSetChanged();
+    }
 
 
 

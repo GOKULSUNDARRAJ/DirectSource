@@ -74,14 +74,18 @@ public class FavoriteFragment extends Fragment {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(),MyBasketActivity.class));
+                MyBasketFragment fragmentB = new MyBasketFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragmentB);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
         itemList = new ArrayList<>();
         populateDummyData();
 
-        adapter1 = new FirstLayoutAdapter(requireContext(), itemList);
-        adapter2 = new SecondLayoutAdapter(requireContext(), itemList);
+        adapter1 = new FirstLayoutAdapter(itemList,requireContext(),getParentFragmentManager());
+        adapter2 = new SecondLayoutAdapter(itemList,requireContext(),getParentFragmentManager());
 
         setRecyclerViewLayoutManager();
 

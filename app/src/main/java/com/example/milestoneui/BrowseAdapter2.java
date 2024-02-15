@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -23,6 +26,8 @@ public class BrowseAdapter2 extends RecyclerView.Adapter<BrowseAdapter2.BrowseVi
 
     private Context context;
     private List<BrowseItem> itemList;
+    private FragmentManager fragmentManager;
+
 
 
     public void setItems(List<BrowseItem> itemList) {
@@ -30,9 +35,10 @@ public class BrowseAdapter2 extends RecyclerView.Adapter<BrowseAdapter2.BrowseVi
         notifyDataSetChanged();
     }
 
-    public BrowseAdapter2(Context context, List<BrowseItem> itemList) {
+    public BrowseAdapter2(Context context, List<BrowseItem> itemList, FragmentManager fragmentManager) {
         this.context = context;
         this.itemList = itemList;
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
@@ -52,8 +58,11 @@ public class BrowseAdapter2 extends RecyclerView.Adapter<BrowseAdapter2.BrowseVi
         holder.laypro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ProductDetailActivity.class);
-                view.getContext().startActivity(intent);
+                Fragment fragment = new ProductDetailFragment(); // Replace ProductDetailFragment with your fragment
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.addToBackStack(null); // Add transaction to back stack so user can navigate back
+                transaction.commit();
             }
         });
 
@@ -201,4 +210,8 @@ public class BrowseAdapter2 extends RecyclerView.Adapter<BrowseAdapter2.BrowseVi
             count =itemView.findViewById(R.id.scantextview);
         }
     }
+
+
 }
+
+

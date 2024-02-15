@@ -25,23 +25,93 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView, recyclerView2;
-    private MyAdapter adapter;
     private MyAdapter2 myAdapter2;
-    private List<String> horizontalData;
-    private List<String> horizontalData2;
-
-    TextView moretxt, tetx1, history;
-    ImageView moreimg, img1, cart;
+    private List<MItem> itemList;
+    private MyAdapter myAdapter;
+    TextView history, tetx1;
+    ImageView cart,img1;
 
 
     private RecyclerView recyclerView3;
     private AllAdapter adapter3;
     private List<ItemModel> dataList;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+        TextView textmore=(TextView) view.findViewById(R.id.textmore);
+        ImageView imgmore=(ImageView) view.findViewById(R.id.morimg);
+
+        textmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToAllMyDeal();
+            }
+        });
+
+        imgmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToAllMyDeal();
+            }
+        });
+
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+
+        List<MyModel> myModelList = new ArrayList<>();
+        myModelList.add(new MyModel(R.drawable.checken, "Letsdough Istanbul Style Simit 4x100g", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.containers, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.co2, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.pizza, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.sause, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.productimage, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.containers, "Letsdough Istanbul Style Simit 4x100g", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.co2, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.pizza, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.spices, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.sause, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.productimage, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.containers, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.co2, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.pizza, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.spices, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.sause, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.spices, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.sause, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.productimage, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.containers, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.co2, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.pizza, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.spices, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.sause, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.productimage, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.containers, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.co2, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.pizza, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.spices, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.sause, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.productimage, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.containers, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+        myModelList.add(new MyModel(R.drawable.co2, "Poultry", "Cans-(GB)-24x330ml", "Tin Products"));
+
+
+        myAdapter = new MyAdapter(getContext(), myModelList,getParentFragmentManager());
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+        recyclerView.setAdapter(myAdapter);
+
+
+
+
+
+
+
 
 
         recyclerView3 = view.findViewById(R.id.recyclerView3);
@@ -63,13 +133,10 @@ public class HomeFragment extends Fragment {
         recyclerView3.setAdapter(adapter3);
 
 
-        recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView2 = view.findViewById(R.id.recyclerView2);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
-        moreimg = view.findViewById(R.id.morimg);
-        moretxt = view.findViewById(R.id.textmore);
         tetx1 = view.findViewById(R.id.text1);
         img1 = view.findViewById(R.id.morimg3);
         history = view.findViewById(R.id.title);
@@ -78,7 +145,11 @@ public class HomeFragment extends Fragment {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), MyBasketActivity.class));
+                MyBasketFragment fragmentB = new MyBasketFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragmentB);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
@@ -103,27 +174,37 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        horizontalData2 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            horizontalData2.add("Item " + (i + 1));
-        }
 
-        myAdapter2 = new MyAdapter2(horizontalData2);
+        recyclerView2 = view.findViewById(R.id.recyclerView2);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+        // Sample data for recyclerView2 (Replace it with your actual data)
+        itemList = new ArrayList<>();
+        itemList.add(new MItem("Item 2", R.drawable.card1));
+        itemList.add(new MItem("Item 2", R.drawable.card3));
+        itemList.add(new MItem("Item 2", R.drawable.card2));
+        itemList.add(new MItem("Item 1", R.drawable.pro1));
+        itemList.add(new MItem("Item 2", R.drawable.card2));
+        itemList.add(new MItem("Item 2", R.drawable.card1));
+        itemList.add(new MItem("Item 2", R.drawable.card2));
+        itemList.add(new MItem("Item 1", R.drawable.pro1));
+        itemList.add(new MItem("Item 2", R.drawable.card2));
+        itemList.add(new MItem("Item 2", R.drawable.card1));
+        itemList.add(new MItem("Item 1", R.drawable.pro1));
+        itemList.add(new MItem("Item 2", R.drawable.card2));
+        itemList.add(new MItem("Item 2", R.drawable.card1));
+        itemList.add(new MItem("Item 2", R.drawable.card2));
+        itemList.add(new MItem("Item 1", R.drawable.pro1));
+        itemList.add(new MItem("Item 2", R.drawable.card2));
+        itemList.add(new MItem("Item 2", R.drawable.card1));
+        itemList.add(new MItem("Item 2", R.drawable.card3));
+        // Add more items as needed
+
+        // Creating and setting adapter for recyclerView2
+        myAdapter2 = new MyAdapter2(getContext(), itemList);
         recyclerView2.setAdapter(myAdapter2);
 
-        horizontalData = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            horizontalData.add("Offer ends 31/10");
-        }
-        adapter = new MyAdapter(getContext(), horizontalData, new MyAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                navigateToNewFragment();
-            }
-        });
 
-
-        recyclerView.setAdapter(adapter);
 
         ImageView goToNewActivityButton = view.findViewById(R.id.back);
         goToNewActivityButton.setOnClickListener(new View.OnClickListener() {
@@ -150,19 +231,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        moretxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                scrollToLastPosition2();
-            }
-        });
 
-        moreimg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                scrollToLastPosition2();
-            }
-        });
 
 
         return view;
@@ -191,10 +260,12 @@ public class HomeFragment extends Fragment {
         transaction.replace(R.id.fragment_container, fragmentB);
         transaction.addToBackStack(null);
         transaction.commit();
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.loyal);
     }
 
     private void scrollToLastPosition2() {
-        recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
+        recyclerView.smoothScrollToPosition(myAdapter.getItemCount() - 1);
     }
 
     private void navigateToNewFragment() {
@@ -244,8 +315,6 @@ public class HomeFragment extends Fragment {
     }
 
 
-
-
     private void navigateToHomeFragment() {
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
@@ -265,6 +334,16 @@ public class HomeFragment extends Fragment {
     private void navigateTosearch() {
         Intent intent = new Intent(getActivity(), SearchActivity.class);
         startActivityForResult(intent, 1);
+    }
+
+    private void navigateToAllMyDeal() {
+        MyDealsFragment fragmentB = new MyDealsFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragmentB);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.deals);
     }
 
 

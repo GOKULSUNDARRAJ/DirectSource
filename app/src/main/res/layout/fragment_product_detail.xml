@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    tools:context=".ProductDetailFragment">
+    tools:context=".ProductDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,6 +24,7 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:foregroundGravity="center_horizontal"
                 android:src="@drawable/leftarrow"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -37,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/font123"
                 android:gravity="center"
@@ -47,6 +49,52 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/cart123"
+                android:paddingTop="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/textView">
+
+                <ImageView
+                    android:id="@+id/cart"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/cart123"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.100000024"></ImageView>
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bluepg"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/cart"
+                    app:layout_constraintEnd_toEndOf="@+id/cart"
+                    app:layout_constraintHorizontal_bias="0.33"
+                    app:layout_constraintStart_toStartOf="@+id/cart"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
@@ -101,7 +149,7 @@
                 android:layout_width="170dp"
                 android:layout_height="50dp"
                 android:background="@drawable/offerbg"
-                android:fontFamily="@font/font123"
+                android:fontFamily="@font/regular"
                 android:gravity="center_vertical"
                 android:paddingLeft="25dp"
                 android:text="Offer ends 31/10"
@@ -141,8 +189,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/img"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/img"
@@ -163,7 +210,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="71dp"
-                android:fontFamily="@font/font123"
+                android:fontFamily="@font/regular"
                 android:lineSpacingExtra="8dp"
                 android:maxLines="2"
                 android:text="£0.40 each"
@@ -225,7 +272,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="3dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/font123"
+                    android:fontFamily="@font/regular"
                     android:text="Pay Online"
                     android:textColor="@color/red1"
                     android:textSize="15dp"
@@ -238,7 +285,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="3dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/font123"
+                    android:fontFamily="@font/regular"
                     android:text="£0.40"
                     android:textColor="@color/red1"
                     android:textSize="15dp"
@@ -287,7 +334,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="3dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/font123"
+                    android:fontFamily="@font/regular"
                     android:text="Pay Online"
                     android:textColor="@color/red1"
                     android:textSize="15dp"
@@ -300,7 +347,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="3dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/font123"
+                    android:fontFamily="@font/regular"
                     android:text="£11.29"
                     android:textColor="@color/red1"
                     android:textSize="15dp"
@@ -316,7 +363,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/font123"
+                android:fontFamily="@font/regular"
                 android:text="Members only discount"
                 android:textColor="@color/ligthblue1"
                 android:textSize="15dp"
@@ -340,10 +387,8 @@
             <LinearLayout
                 android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="80dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.cardview.widget.CardView
@@ -369,20 +414,21 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_marginStart="24dp"
-                                android:src="@drawable/greenplus"
+                                android:src="@drawable/minus1"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/scantextview"
                                 app:layout_constraintHorizontal_bias="0.0"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <TextView
+                            <EditText
                                 android:id="@+id/scantextview"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/font123"
                                 android:maxLines="2"
                                 android:text="4"
+                                android:backgroundTint="@color/green"
                                 android:textColor="@color/white"
                                 android:textSize="20dp"
                                 android:textStyle="bold"
@@ -394,9 +440,9 @@
                             <ImageView
                                 android:id="@+id/add"
                                 android:layout_width="20dp"
-                                android:layout_height="10dp"
+                                android:layout_height="20dp"
                                 android:layout_marginEnd="24dp"
-                                android:src="@drawable/minus1"
+                                android:src="@drawable/greenplus"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="1.0"
@@ -412,24 +458,145 @@
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/scancard1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="50dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btngreen"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <TextView
+                                android:id="@+id/scantextview1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/fontm"
+                                android:maxLines="2"
+                                android:text="Add"
+                                android:backgroundTint="@color/green"
+                                android:textColor="@color/white"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/des"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="11dp"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="@font/regular"
                 android:maxLines="3"
-                android:fontFamily="@font/font123"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                 android:textColor="@color/black1"
                 android:textSize="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+                app:layout_constraintVertical_bias="1.0" />
 
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/red1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.55"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/des">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/itxtitem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/fontm"
+                        android:gravity="center_vertical"
+                        android:text="4 items added"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        android:id="@+id/itxtitem1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="55dp"
+                        android:fontFamily="@font/fontm"
+                        android:gravity="center_vertical"
+                        android:text="View Cart"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/itxtitem"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <ImageView
+                        android:id="@+id/itxtitem1img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/forward"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/itxtitem1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+
 
 </LinearLayout>

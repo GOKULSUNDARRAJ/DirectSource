@@ -1,9 +1,6 @@
 package com.example.milestoneui;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,60 +10,43 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private List<String> data;
-    private OnItemClickListener listener;
+    private List<MyModel> itemList;
     private Context context;
+    private FragmentManager fragmentManager; // Add this field
 
-    public MyAdapter(Context context, List<String> data, OnItemClickListener listener) {
+    // Modify the constructor to accept FragmentManager
+    public MyAdapter(Context context, List<MyModel> itemList, FragmentManager fragmentManager) {
         this.context = context;
-        this.data = data;
-        this.listener = listener;
+        this.itemList = itemList;
+        this.fragmentManager = fragmentManager;
     }
 
-
-
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cardview, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        holder.itemText.setText(data.get(position));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        MyModel item = itemList.get(position);
 
-        holder.carproduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    listener.onItemClick(position);
-                }
-            }
-        });
-
-        holder.carproduct.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-
-                showCustomDialogImage();
-                return false;
-
-            }
-
-
-        });
-
-
+        // Bind your data to the views here
+        holder.itemImage.setImageResource(item.getImageResource());
+        holder.itemText1.setText(item.getText1());
+        holder.itemText2.setText(item.getText2());
+        holder.itemText3.setText(item.getText3());
 
 
         holder.scanCard1.setOnClickListener(new View.OnClickListener() {
@@ -82,12 +62,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 }
             }
         });
-
-
-
-
-
-
 
         holder.add1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,27 +154,50 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
             }
         });
+
+
+        holder.carproduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ProductDetailFragment(); // Replace ProductDetailFragment with your fragment
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.addToBackStack(null); // Add transaction to back stack so user can navigate back
+                transaction.commit();
+            }
+        });
+
+
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return itemList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView itemImage;
+        TextView itemText1, itemText2, itemText3;
+        CardView cardView;
+
         public TextView itemText,Txt;
-        public ImageView itemImage,add1,minus;
+        public ImageView add1,minus;
         public CardView carproduct;
 
         EditText count;
         CardView scanCard1,scanCard;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            itemImage = itemView.findViewById(R.id.itemImage);
+            itemText1 = itemView.findViewById(R.id.itemText1);
+            itemText2 = itemView.findViewById(R.id.itemText2);
+            itemText3 = itemView.findViewById(R.id.itemText3);
+            cardView = itemView.findViewById(R.id.carproduct);
 
-
-        public ViewHolder(View view) {
-            super(view);
-            itemText = view.findViewById(R.id.itemText);
-            itemImage = view.findViewById(R.id.itemImage);
-            carproduct=view.findViewById(R.id.carproduct);
+            itemText = itemView.findViewById(R.id.itemText);
+            itemImage =itemView.findViewById(R.id.itemImage);
+            carproduct=itemView.findViewById(R.id.carproduct);
             scanCard1 =itemView.findViewById(R.id.scancard1);
             scanCard =itemView.findViewById(R.id.scancard);
 
@@ -208,26 +205,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             add1=itemView.findViewById(R.id.plus);
             minus=itemView.findViewById(R.id.minus);
             count =itemView.findViewById(R.id.scantextview);
-
-
-
         }
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
 
-
-    private void showCustomDialogImage() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        View dialogView = LayoutInflater.from(context).inflate(R.layout.viewimage, null);
-        builder.setView(dialogView);
-        AlertDialog dialog = builder.create();
-
-
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-    }
 
 }

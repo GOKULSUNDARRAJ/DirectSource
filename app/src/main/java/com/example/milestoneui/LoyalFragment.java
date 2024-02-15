@@ -55,7 +55,11 @@ public class LoyalFragment extends Fragment {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), MyBasketActivity.class));
+                MyBasketFragment fragmentB = new MyBasketFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, fragmentB);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
         LinearLayoutManager layoutManager

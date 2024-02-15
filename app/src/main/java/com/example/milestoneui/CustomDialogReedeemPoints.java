@@ -25,7 +25,7 @@ public class CustomDialogReedeemPoints extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialogreedeem);
+        setContentView(R.layout.delivery_book_slot);
 
 
         Button continuebtn=findViewById(R.id.continu);

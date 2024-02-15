@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -23,12 +26,13 @@ public class SecondLayoutAdapter extends RecyclerView.Adapter<SecondLayoutAdapte
 
     private List<CommonModel> dataList;
     private Context context;
+    private FragmentManager fragmentManager;
 
-    public SecondLayoutAdapter(Context context, List<CommonModel> dataList) {
-        this.context = context;
+    public SecondLayoutAdapter(List<CommonModel> dataList, Context context, FragmentManager fragmentManager) {
         this.dataList = dataList;
+        this.context = context;
+        this.fragmentManager = fragmentManager;
     }
-
 
     @NonNull
     @Override
@@ -47,8 +51,11 @@ public class SecondLayoutAdapter extends RecyclerView.Adapter<SecondLayoutAdapte
         holder.laypro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ProductDetailActivity.class);
-                view.getContext().startActivity(intent);
+                Fragment fragment = new ProductDetailFragment(); // Replace ProductDetailFragment with your fragment
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.addToBackStack(null); // Add transaction to back stack so user can navigate back
+                transaction.commit();
             }
         });
 
